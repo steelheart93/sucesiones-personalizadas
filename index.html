@@ -22,8 +22,14 @@
 
 <body>
     <h3>Fórmula de Generación de Sucesiones Personalizadas</h3>
-    <p>\[ s_m = \sum_{n=0}^{m-1} \left( \left( \sum_{k=0}^{n-1} \frac{(-1)^k \cdot C(n-1, k) \cdot \alpha_k}{(n-1)!}
-        \right) \times \prod_{i=1}^{m-1} (m - i) \right) \]</p>
+
+    <p>
+        \[ b_n = \frac{1}{(n-1)!} \sum_{k=0}^{n-1} (-1)^k \cdot C(n-1, k) \cdot \alpha_k \]
+    </p>
+
+    <p>
+        \[ s_m = \sum_{n=0}^{m-1} \left( b_n \times \left( \prod_{n=1}^{m-1} (m - n) \right) \right) \]
+    </p>
 
     <script>
         // Función para calcular el factorial de un número
