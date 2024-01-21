@@ -4,17 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
         </script>
-    
+
+    <style>
+        body {
+            text-align: center;
+            background-color: whitesmoke;
+        }
+    </style>
+
     <title>¿Cuál es el siguiente número de esta sucesión?</title>
 </head>
 
 <body>
-    <p>La fórmula es: \( s_m = \sum_{n=0}^{m-1} \text{calcular\_bn}(n) \times \text{calcularProductoria}(m) \)</p>
+    <h3>Fórmula de Generación de Sucesiones Personalizadas</h3>
+    <p>\[ s_m = \sum_{n=0}^{m-1} \left( \left( \sum_{k=0}^{n-1} \frac{(-1)^k \cdot C(n-1, k) \cdot \alpha_k}{(n-1)!}
+        \right) \times \prod_{i=1}^{m-1} (m - i) \right) \]</p>
 
     <script>
         // Función para calcular el factorial de un número
