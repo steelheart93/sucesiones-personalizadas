@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Cuál es el siguiente número de esta sucesión?</title>
+</head>
+
+<body>
+    <script>
+        // Función para calcular el factorial de un número
+        function factorial(num) {
+            if (num === 0 || num === 1) {
+                return 1;
+            } else {
+                return num * factorial(num - 1);
+            }
+        }
+
+        // Función para calcular la combinatoria
+        function combinatoria(n, r) {
+            if (n < r) {
+                return 0;  // La combinatoria no está definida si n < r
+            }
+
+            const numerador = factorial(n);
+            const denominador = factorial(r) * factorial(n - r);
+
+            return numerador / denominador;
+        }
+
+        // Función para calcular b_n
+        function calcular_bn(n) {
+            let bn = 0;
+
+            for (let k = 0; k < n - 1; k++) {
+                const bn1 = (-1) ** k;
+                const bn2 = combinatoria(n - 1, k);
+                const bn3 = bn1 * bn2;
+                const bn4 = bn3 * factorial(n - 1);
+
+                // Falta alfa K
+
+                bn += bn4;  // Acumular los resultados en bn
+            }
+
+            return bn;
+        }
+
+        function calcularProductoria(m) {
+            // Inicializar la productoria a 1
+            let productoria = 1;
+
+            // Iterar desde n = 1 hasta m - 1
+            for (let n = 1; n <= m - 1; n++) {
+                // Multiplicar el valor actual de (m - n) a la productoria
+                productoria *= (m - n);
+            }
+
+            // Devolver el resultado final
+            return productoria;
+        }
+
+        // Función para calcular s_m
+        function calcular_sm(m) {
+            let sm = 0;
+
+            for (let n = 0; n < m - 1; n++) {
+                sm1 = calcular_bn(n);
+                sm2 = calcularProductoria(m);
+                sm3 = sm1 * sm2;
+
+                sm += sm3;  // Acumular los resultados en bn
+            }
+
+            return sm;
+        }
+    </script>
+</body>
+
+</html>
