@@ -1,0 +1,56 @@
+Le pedi a ChatGPT que me hiciera el código en JS apartir del LaTeX que me ayudo a genera y esto fue lo que me entrego.
+
+// Función para calcular el coeficiente binomial C(n, k)
+function binomialCoefficient(n, k) {
+    if (k === 0 || k === n) {
+        return 1;
+    } else {
+        return binomialCoefficient(n - 1, k - 1) + binomialCoefficient(n - 1, k);
+    }
+}
+
+// Función para calcular b_n
+function calculate_bn(n, alpha) {
+    let bn = 0;
+    for (let k = 0; k < n; k++) {
+        bn += Math.pow(-1, k) * binomialCoefficient(n - 1, k) * alpha[k];
+    }
+    return bn / factorial(n - 1);
+}
+
+// Función para calcular el factorial de un número
+function factorial(num) {
+    if (num <= 1) {
+        return 1;
+    } else {
+        return num * factorial(num - 1);
+    }
+}
+
+// Función para calcular s_m
+function calculate_sm(m, alpha) {
+    let sm = 0;
+    for (let n = 0; n < m; n++) {
+        sm += calculate_bn(n, alpha) * productTerm(m, n);
+    }
+    return sm;
+}
+
+// Función para calcular el término del producto en s_m
+function productTerm(m, n) {
+    let product = 1;
+    for (let i = 1; i <= m - 1; i++) {
+        product *= (m - i);
+    }
+    return product;
+}
+
+// Ejemplo de uso
+const alphaValues = [/* Insertar los valores de alpha_k aquí */];
+const mValue = /* Insertar el valor de m aquí */;
+
+const result_bn = calculate_bn(/* nValue */, alphaValues);
+const result_sm = calculate_sm(mValue, alphaValues);
+
+console.log("b_n:", result_bn);
+console.log("s_m:", result_sm);
