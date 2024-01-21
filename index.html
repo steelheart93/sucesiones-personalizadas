@@ -34,11 +34,11 @@
         function calcular_bn(n) {
             let bn = 0;
 
-            for (let k = 0; k < n - 1; k++) {
-                const bn1 = (-1) ** k;
-                const bn2 = combinatoria(n - 1, k);
-                const bn3 = bn1 * bn2;
-                const bn4 = bn3 * factorial(n - 1);
+            for (let k = 0; k <= n - 1; k++) {
+                let bn1 = (-1) ** k;
+                let bn2 = combinatoria(n - 1, k);
+                let bn3 = bn1 * bn2;
+                let bn4 = bn3 / factorial(n - 1);
 
                 // Falta alfa K
 
@@ -66,12 +66,12 @@
         function calcular_sm(m) {
             let sm = 0;
 
-            for (let n = 0; n < m - 1; n++) {
-                sm1 = calcular_bn(n);
-                sm2 = calcularProductoria(m);
-                sm3 = sm1 * sm2;
+            for (let n = 0; n <= m - 1; n++) {
+                let sm1 = calcular_bn(n);
+                let sm2 = calcularProductoria(m);
+                let sm3 = sm1 * sm2;
 
-                sm += sm3;  // Acumular los resultados en bn
+                sm += sm3;  // Acumular los resultados en sm
             }
 
             return sm;
