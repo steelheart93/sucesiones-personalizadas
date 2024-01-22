@@ -31,6 +31,9 @@
         \[ s_m = \sum_{n=0}^{m-1} \left( b_n \times \left( \prod_{n=1}^{m-1} (m - n) \right) \right) \]
     </p>
 
+    <hr>
+    <p id="resultado"></p>
+
     <script>
         // Función para calcular el factorial de un número
         function factorial(num) {
@@ -53,32 +56,57 @@
             return numerador / denominador;
         }
 
+        function escribir(texto){
+            let resultado = document.getElementById("resultado");
+            resultado.innerText += `\n${texto}`;
+        }
+
         // Función para calcular b_n
-        function calcular_bn(n) {
+        function calcular_bn(n, a) {
             let bn = 0;
+            escribir("");
+            escribir(`calculando b${n}`);
+            escribir("");
+
+            sumatoria = "";
 
             for (let k = 0; k <= n - 1; k++) {
-                let bn1 = (-1) ** k;
-                let bn2 = combinatoria(n - 1, k);
-                let bn3 = bn1 * bn2;
-                let bn4 = bn3 / factorial(n - 1);
+                let r1= (-1) ** k;
+                let r2 = combinatoria(n - 1, k);
+                
+                let r3 = r1 * r2 * a;
+                escribir(`(-1)^${k} * C(${r1}-1, ${k}) * ${a}`);
+                escribir(`${r1} * ${r2} * ${a} = ${r3}`);
+                escribir("");
 
-                // Falta alfa K
-
-                bn += bn4;  // Acumular los resultados en bn
+                bn += r3;  // Acumular los resultados en bn
+                sumatoria += `${r3},`;
             }
 
-            return bn;
+            escribir("");
+            escribir(`S(${sumatoria.slice(0, -1)}) = ${bn}`);
+            escribir("");
+
+            r4 = bn / factorial(n - 1);
+            escribir(`${bn} / (${n}-1)! = ${r4}`);
+
+            return r4;
         }
 
         function calcularProductoria(m) {
             // Inicializar la productoria a 1
             let productoria = 1;
+            escribir("");
+            escribir("calculando productoria");
+            escribir("");
 
             // Iterar desde n = 1 hasta m - 1
-            for (let n = 1; n <= m - 1; n++) {
+            for (let n = 0; n <= m - 1; n++) {
+                r5 = (m - n);
+                escribir(`${m}-${n} = ${r5}`);
+
                 // Multiplicar el valor actual de (m - n) a la productoria
-                productoria *= (m - n);
+                productoria *= r5;
             }
 
             // Devolver el resultado final
@@ -86,19 +114,37 @@
         }
 
         // Función para calcular s_m
-        function calcular_sm(m) {
+        function calcular_sm(alphaValues) {
+            let m = alphaValues.length;
+
             let sm = 0;
 
             for (let n = 0; n <= m - 1; n++) {
-                let sm1 = calcular_bn(n);
-                let sm2 = calcularProductoria(m);
+                let a = alphaValues[n]; 
+                let sm1 = calcular_bn(n + 1, a);
+                
+                let sm2 = 1;
+                // let sm2 = calcularProductoria(m);
+                
                 let sm3 = sm1 * sm2;
+                escribir("");
+                escribir(`calculando s${n} parcial`);
+                escribir(`${sm1} * ${sm2} = ${sm3}`);
 
                 sm += sm3;  // Acumular los resultados en sm
             }
 
             return sm;
         }
+
+        // Main()
+        // calcular_bn(1, 1);
+
+        //escribir("");
+        // calcular_bn(2, 7);
+
+        const alphaValues = [1, 7, 11];
+        calcular_sm(alphaValues);
     </script>
 </body>
 
